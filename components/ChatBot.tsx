@@ -129,10 +129,10 @@ export default function ChatBot() {
 const sendMessage = async (text: string) => {
   if (!text.trim()) return
 
-  const userMsg = {
-    role: 'user',
-    content: text,
-  }
+  const userMsg: Message = {
+  role: 'user',
+  content: text,
+}
 
   setMessages(prev => [...prev, userMsg])
 
