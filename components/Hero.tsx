@@ -13,25 +13,39 @@ const FADE = {
 // Typewriter words that cycle in the hero headline
 const TYPEWRITER_WORDS = ["products", "systems", "platforms", "solutions"];
 
-function TypingLine({ text, speed = 20, delay = 0 }) {
-  const [displayed, setDisplayed] = useState("");
+interface TypingLineProps {
+  text: string
+  speed?: number
+  delay?: number
+}
+
+function TypingLine({
+  text,
+  speed = 20,
+  delay = 0,
+}: TypingLineProps) {
+  const [displayed, setDisplayed] = useState("")
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      let i = 0;
+      let i = 0
+
       const interval = setInterval(() => {
-        setDisplayed(text.slice(0, i));
-        i++;
-        if (i > text.length) clearInterval(interval);
-      }, speed);
+        setDisplayed(text.slice(0, i))
+        i++
 
-      return () => clearInterval(interval);
-    }, delay);
+        if (i > text.length) {
+          clearInterval(interval)
+        }
+      }, speed)
 
-    return () => clearTimeout(timeout);
-  }, [text, speed, delay]);
+      return () => clearInterval(interval)
+    }, delay)
 
-  return <span>{displayed}</span>;
+    return () => clearTimeout(timeout)
+  }, [text, speed, delay])
+
+  return <span>{displayed}</span>
 }
 
 function TypewriterWord() {
